@@ -8,7 +8,7 @@
 import RPi.GPIO as GPIO
 from time import sleep\
      
-import sevenSegFunc
+import sevenSegFuncCP2
 
 #Allows for cleaner runtime
 GPIO.setwarnings(False)
