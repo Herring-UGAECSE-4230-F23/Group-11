@@ -1,0 +1,653 @@
+Breakpoint 1, _start () at 1_flags_ex5_13.s:32
+32		ldr	r1, =data1
+(gdb) i r
+r0             0x0                 0
+r1             0x0                 0
+r2             0x0                 0
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10074             0x10074 <_start>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+33		ldr	r2, =data2
+(gdb) i r
+r0             0x0                 0
+r1             0x2011c             131356
+r2             0x0                 0
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10078             0x10078 <_start+4>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+34		ldr	r3, =result
+(gdb) i r
+r0             0x0                 0
+r1             0x2011c             131356
+r2             0x20120             131360
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1007c             0x1007c <_start+8>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+36		ldr 	r4, [r1]	@ r4 = ???
+(gdb) i r
+r0             0x0                 0
+r1             0x2011c             131356
+r2             0x20120             131360
+r3             0x2013c             131388
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10080             0x10080 <_start+12>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+37		ldr 	r5, [r2]	@ r5 = ???
+(gdb) i r
+r0             0x0                 0
+r1             0x2011c             131356
+r2             0x20120             131360
+r3             0x2013c             131388
+r4             0x6e2f356f          1848587631
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10084             0x10084 <_start+16>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+38		adds	r4, r4, r5	@ r4 = r4 + r5 = ???, or does it?
+(gdb) i r
+r0             0x0                 0
+r1             0x2011c             131356
+r2             0x20120             131360
+r3             0x2013c             131388
+r4             0x6e2f356f          1848587631
+r5             0x13d49530          332698928
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10088             0x10088 <_start+20>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+39		str	r4, [r3]	@store result in location
+(gdb) i r
+r0             0x0                 0
+r1             0x2011c             131356
+r2             0x20120             131360
+r3             0x2013c             131388
+r4             0x8203ca9f          2181286559
+r5             0x13d49530          332698928
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1008c             0x1008c <_start+24>
+cpsr           0x90000010          -1879048176
+fpscr          0x0                 0
+(gdb) s
+42		ldr	r1, =data3
+(gdb) i r
+r0             0x0                 0
+r1             0x2011c             131356
+r2             0x20120             131360
+r3             0x2013c             131388
+r4             0x8203ca9f          2181286559
+r5             0x13d49530          332698928
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10090             0x10090 <_start+28>
+cpsr           0x90000010          -1879048176
+fpscr          0x0                 0
+(gdb) s
+43		ldr	r2, =data4
+(gdb) i r
+r0             0x0                 0
+r1             0x20124             131364
+r2             0x20120             131360
+r3             0x2013c             131388
+r4             0x8203ca9f          2181286559
+r5             0x13d49530          332698928
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10094             0x10094 <_start+32>
+cpsr           0x90000010          -1879048176
+fpscr          0x0                 0
+(gdb) s
+44		ldr	r3, =result2
+(gdb) i r
+r0             0x0                 0
+r1             0x20124             131364
+r2             0x20128             131368
+r3             0x2013c             131388
+r4             0x8203ca9f          2181286559
+r5             0x13d49530          332698928
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10098             0x10098 <_start+36>
+cpsr           0x90000010          -1879048176
+fpscr          0x0                 0
+(gdb) s
+46		ldr 	r4, [r1]	@ r4 = ??
+(gdb) i r
+r0             0x0                 0
+r1             0x20124             131364
+r2             0x20128             131368
+r3             0x20140             131392
+r4             0x8203ca9f          2181286559
+r5             0x13d49530          332698928
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1009c             0x1009c <_start+40>
+cpsr           0x90000010          -1879048176
+fpscr          0x0                 0
+(gdb) s
+47		ldr	r5, [r2]	@ r5 = ??
+(gdb) i r
+r0             0x0                 0
+r1             0x20124             131364
+r2             0x20128             131368
+r3             0x20140             131392
+r4             0x542f356f          1412380015
+r5             0x13d49530          332698928
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100a0             0x100a0 <_start+44>
+cpsr           0x90000010          -1879048176
+fpscr          0x0                 0
+(gdb) s
+48		adds	r4, r4, r5	@ r4 = r4 + r5 = ???, or does it?
+(gdb) i r
+r0             0x0                 0
+r1             0x20124             131364
+r2             0x20128             131368
+r3             0x20140             131392
+r4             0x542f356f          1412380015
+r5             0x12e09530          316708144
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100a4             0x100a4 <_start+48>
+cpsr           0x90000010          -1879048176
+fpscr          0x0                 0
+(gdb) s
+49		str	r4, [r3]	@store result in location
+(gdb) i r
+r0             0x0                 0
+r1             0x20124             131364
+r2             0x20128             131368
+r3             0x20140             131392
+r4             0x670fca9f          1729088159
+r5             0x12e09530          316708144
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100a8             0x100a8 <_start+52>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+52		ldr	r1, =data5
+(gdb) i r
+r0             0x0                 0
+r1             0x20124             131364
+r2             0x20128             131368
+r3             0x20140             131392
+r4             0x670fca9f          1729088159
+r5             0x12e09530          316708144
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100ac             0x100ac <_start+56>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+53		ldr	r2, =data6
+(gdb) i r
+r0             0x0                 0
+r1             0x2012c             131372
+r2             0x20128             131368
+r3             0x20140             131392
+r4             0x670fca9f          1729088159
+r5             0x12e09530          316708144
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100b0             0x100b0 <_start+60>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+54		ldr	r3, =result3
+(gdb) i r
+r0             0x0                 0
+r1             0x2012c             131372
+r2             0x20130             131376
+r3             0x20140             131392
+r4             0x670fca9f          1729088159
+r5             0x12e09530          316708144
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100b4             0x100b4 <_start+64>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+56		ldr 	r4, [r1]	@ r4 = ??
+(gdb) i r
+r0             0x0                 0
+r1             0x2012c             131372
+r2             0x20130             131376
+r3             0x20144             131396
+r4             0x670fca9f          1729088159
+r5             0x12e09530          316708144
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100b8             0x100b8 <_start+68>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+57		ldr 	r5, [r2]	@ r5 = ??
+(gdb) i r
+r0             0x0                 0
+r1             0x2012c             131372
+r2             0x20130             131376
+r3             0x20144             131396
+r4             0x80000000          2147483648
+r5             0x12e09530          316708144
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100bc             0x100bc <_start+72>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+58		adds	r4, r4, r5	@ r4 = r4 + r5 = ???, or does it?
+(gdb) i r
+r0             0x0                 0
+r1             0x2012c             131372
+r2             0x20130             131376
+r3             0x20144             131396
+r4             0x80000000          2147483648
+r5             0xffffffff          4294967295
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100c0             0x100c0 <_start+76>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+59		str	r4, [r3]	@store result in location
+(gdb) i r
+r0             0x0                 0
+r1             0x2012c             131372
+r2             0x20130             131376
+r3             0x20144             131396
+r4             0x7fffffff          2147483647
+r5             0xffffffff          4294967295
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100c4             0x100c4 <_start+80>
+cpsr           0x30000010          805306384
+fpscr          0x0                 0
+(gdb) s
+62		ldr	r1, =data7
+(gdb) i r
+r0             0x0                 0
+r1             0x2012c             131372
+r2             0x20130             131376
+r3             0x20144             131396
+r4             0x7fffffff          2147483647
+r5             0xffffffff          4294967295
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100c8             0x100c8 <_start+84>
+cpsr           0x30000010          805306384
+fpscr          0x0                 0
+(gdb) s
+63		ldr	r2, =data8
+(gdb) i r
+r0             0x0                 0
+r1             0x20134             131380
+r2             0x20130             131376
+r3             0x20144             131396
+r4             0x7fffffff          2147483647
+r5             0xffffffff          4294967295
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100cc             0x100cc <_start+88>
+cpsr           0x30000010          805306384
+fpscr          0x0                 0
+(gdb) s
+64		ldr	r3, =result4
+(gdb) i r
+r0             0x0                 0
+r1             0x20134             131380
+r2             0x20138             131384
+r3             0x20144             131396
+r4             0x7fffffff          2147483647
+r5             0xffffffff          4294967295
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100d0             0x100d0 <_start+92>
+cpsr           0x30000010          805306384
+fpscr          0x0                 0
+(gdb) s
+66		ldr 	r4, [r1]	@ r4 = ??
+(gdb) i r
+r0             0x0                 0
+r1             0x20134             131380
+r2             0x20138             131384
+r3             0x20148             131400
+r4             0x7fffffff          2147483647
+r5             0xffffffff          4294967295
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100d4             0x100d4 <_start+96>
+cpsr           0x30000010          805306384
+fpscr          0x0                 0
+(gdb) s
+67		ldr 	r5, [r2]	@ r5 = ??
+(gdb) i r
+r0             0x0                 0
+r1             0x20134             131380
+r2             0x20138             131384
+r3             0x20148             131400
+r4             0xfffffffe          4294967294
+r5             0xffffffff          4294967295
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100d8             0x100d8 <_start+100>
+cpsr           0x30000010          805306384
+fpscr          0x0                 0
+(gdb) s
+68		adds	r4, r4, r5	@ r4 = r4 + r5 = ???, or does it?
+(gdb) i r
+r0             0x0                 0
+r1             0x20134             131380
+r2             0x20138             131384
+r3             0x20148             131400
+r4             0xfffffffe          4294967294
+r5             0xfffffffb          4294967291
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100dc             0x100dc <_start+104>
+cpsr           0x30000010          805306384
+fpscr          0x0                 0
+(gdb) i r
+r0             0x0                 0
+r1             0x20134             131380
+r2             0x20138             131384
+r3             0x20148             131400
+r4             0xfffffffe          4294967294
+r5             0xfffffffb          4294967291
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100dc             0x100dc <_start+104>
+cpsr           0x30000010          805306384
+fpscr          0x0                 0
+(gdb) s
+69		str	r4, [r3]	@store result in location
+(gdb) i r
+r0             0x0                 0
+r1             0x20134             131380
+r2             0x20138             131384
+r3             0x20148             131400
+r4             0xfffffff9          4294967289
+r5             0xfffffffb          4294967291
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100e0             0x100e0 <_start+108>
+cpsr           0xa0000010          -1610612720
+fpscr          0x0                 0
+(gdb) s
+71		mov 	r7, #1
+(gdb) i r
+r0             0x0                 0
+r1             0x20134             131380
+r2             0x20138             131384
+r3             0x20148             131400
+r4             0xfffffff9          4294967289
+r5             0xfffffffb          4294967291
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100e4             0x100e4 <_start+112>
+cpsr           0xa0000010          -1610612720
+fpscr          0x0                 0
+(gdb) s
+72		svc 0
+(gdb) i r
+r0             0x0                 0
+r1             0x20134             131380
+r2             0x20138             131384
+r3             0x20148             131400
+r4             0xfffffff9          4294967289
+r5             0xfffffffb          4294967291
+r6             0x0                 0
+r7             0x1                 1
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x100e8             0x100e8 <_start+116>
+cpsr           0xa0000010          -1610612720
+fpscr          0x0                 0
+(gdb) s
+[Inferior 1 (process 1647) exited normally]
+(gdb) 1848587631
+r5             0x13d49530          332698928

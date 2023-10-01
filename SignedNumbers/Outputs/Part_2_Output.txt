@@ -1,0 +1,276 @@
+Breakpoint 1, _start () at 2_flagsfixed_ex5_13.s:21
+21		ldr	r1, =data1
+(gdb) i r
+r0             0x0                 0
+r1             0x0                 0
+r2             0x0                 0
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x10074             0x10074 <_start>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+22		ldr	r2, =data2
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x0                 0
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x10078             0x10078 <_start+4>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+23		ldr	r3, =result
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x1007c             0x1007c <_start+8>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+25		ldrb 	r4, [r1]	@ r4 = -128
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x10080             0x10080 <_start+12>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+26		ldrb 	r5, [r2]	@ r5 = -2
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0x80                128
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x10084             0x10084 <_start+16>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+27		adds	r4, r4, r5	@ r4 = r4 + r5 = ???
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0x80                128
+r5             0xfe                254
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x10088             0x10088 <_start+20>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+28		str	r4, [r3]	@store result in location result
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0x17e               382
+r5             0xfe                254
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x1008c             0x1008c <_start+24>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+32		ldrsb 	r4, [r1]	@ r4 = -128
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0x17e               382
+r5             0xfe                254
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x10090             0x10090 <_start+28>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+33		ldrsb 	r5, [r2]	@ r5 = -2
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0xffffff80          4294967168
+r5             0xfe                254
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x10094             0x10094 <_start+32>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+34		adds	r4, r4, r5	@ r4 = r4 + r5 = ???
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0xffffff80          4294967168
+r5             0xfffffffe          4294967294
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x10098             0x10098 <_start+36>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+35		str	r4, [r3]	@store result in location
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0xffffff7e          4294967166
+r5             0xfffffffe          4294967294
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x1009c             0x1009c <_start+40>
+cpsr           0xa0000010          -1610612720
+fpscr          0x0                 0
+(gdb) s
+38		mov 	r7, #1
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0xffffff7e          4294967166
+r5             0xfffffffe          4294967294
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x100a0             0x100a0 <_start+44>
+cpsr           0xa0000010          -1610612720
+fpscr          0x0                 0
+(gdb) s
+39		svc 0
+(gdb) i r
+r0             0x0                 0
+r1             0x200b4             131252
+r2             0x200b5             131253
+r3             0x200b6             131254
+r4             0xffffff7e          4294967166
+r5             0xfffffffe          4294967294
+r6             0x0                 0
+r7             0x1                 1
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2c0          0xfffef2c0
+lr             0x0                 0
+pc             0x100a4             0x100a4 <_start+48>
+cpsr           0xa0000010          -1610612720
+fpscr          0x0                 0
+(gdb) s
+[Inferior 1 (process 1918) exited normally]
+(gdb) 

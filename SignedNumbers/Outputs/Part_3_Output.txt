@@ -1,0 +1,855 @@
+Starting program: /home/group-11/Desktop/SignedNumbers/Part 3/3_Loopadd_prog5_1 
+
+Breakpoint 1, _start () at 3_Loopadd_prog5_1.s:18
+18		ldr	r0, =sign_dat
+(gdb) i r
+r0             0x0                 0
+r1             0x0                 0
+r2             0x0                 0
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10074             0x10074 <_start>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+19		mov	r3, #9
+(gdb) i r
+r0             0x200ac             131244
+r1             0x0                 0
+r2             0x0                 0
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10078             0x10078 <_start+4>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s 
+20		mov	r2, #0
+(gdb) i r
+r0             0x200ac             131244
+r1             0x0                 0
+r2             0x0                 0
+r3             0x9                 9
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1007c             0x1007c <_start+8>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+loop () at 3_Loopadd_prog5_1.s:21
+21	loop:	ldrsb 	r1, [r0]  
+(gdb) ir 
+Undefined command: "ir".  Try "help".
+(gdb) i r
+r0             0x200ac             131244
+r1             0x0                 0
+r2             0x0                 0
+r3             0x9                 9
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10080             0x10080 <loop>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+23		add	r2, r2, r1	@ r2 = r2 + r1
+(gdb) i r
+r0             0x200ac             131244
+r1             0xd                 13
+r2             0x0                 0
+r3             0x9                 9
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10084             0x10084 <loop+4>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+24		add	r0, r0, #1	@ point to next
+(gdb) i r
+r0             0x200ac             131244
+r1             0xd                 13
+r2             0xd                 13
+r3             0x9                 9
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10088             0x10088 <loop+8>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+25		subs	r3, r3, #1	@ decrement counter
+(gdb) i r
+r0             0x200ad             131245
+r1             0xd                 13
+r2             0xd                 13
+r3             0x9                 9
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1008c             0x1008c <loop+12>
+cpsr           0x10                16
+fpscr          0x0                 0
+(gdb) s
+26		bne	loop
+(gdb) i r
+r0             0x200ad             131245
+r1             0xd                 13
+r2             0xd                 13
+r3             0x8                 8
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10090             0x10090 <loop+16>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+21	loop:	ldrsb 	r1, [r0]  
+(gdb) i r
+r0             0x200ad             131245
+r1             0xd                 13
+r2             0xd                 13
+r3             0x8                 8
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10080             0x10080 <loop>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+23		add	r2, r2, r1	@ r2 = r2 + r1
+(gdb) i r
+r0             0x200ad             131245
+r1             0xfffffff6          4294967286
+r2             0xd                 13
+r3             0x8                 8
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10084             0x10084 <loop+4>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+24		add	r0, r0, #1	@ point to next
+(gdb) i r
+r0             0x200ad             131245
+r1             0xfffffff6          4294967286
+r2             0x3                 3
+r3             0x8                 8
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10088             0x10088 <loop+8>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+25		subs	r3, r3, #1	@ decrement counter
+(gdb) i r
+r0             0x200ae             131246
+r1             0xfffffff6          4294967286
+r2             0x3                 3
+r3             0x8                 8
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1008c             0x1008c <loop+12>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+26		bne	loop
+(gdb) i r
+r0             0x200ae             131246
+r1             0xfffffff6          4294967286
+r2             0x3                 3
+r3             0x7                 7
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10090             0x10090 <loop+16>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+21	loop:	ldrsb 	r1, [r0]  
+(gdb) i r
+r0             0x200ae             131246
+r1             0xfffffff6          4294967286
+r2             0x3                 3
+r3             0x7                 7
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10080             0x10080 <loop>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+23		add	r2, r2, r1	@ r2 = r2 + r1
+(gdb) i r
+r0             0x200ae             131246
+r1             0x13                19
+r2             0x3                 3
+r3             0x7                 7
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10084             0x10084 <loop+4>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+24		add	r0, r0, #1	@ point to next
+(gdb) i r
+r0             0x200ae             131246
+r1             0x13                19
+r2             0x16                22
+r3             0x7                 7
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10088             0x10088 <loop+8>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+25		subs	r3, r3, #1	@ decrement counter
+(gdb) i r
+r0             0x200af             131247
+r1             0x13                19
+r2             0x16                22
+r3             0x7                 7
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1008c             0x1008c <loop+12>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+26		bne	loop
+(gdb) i r
+r0             0x200af             131247
+r1             0x13                19
+r2             0x16                22
+r3             0x6                 6
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10090             0x10090 <loop+16>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+21	loop:	ldrsb 	r1, [r0]  
+(gdb) i r
+r0             0x200af             131247
+r1             0x13                19
+r2             0x16                22
+r3             0x6                 6
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10080             0x10080 <loop>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+23		add	r2, r2, r1	@ r2 = r2 + r1
+(gdb) i r
+r0             0x200af             131247
+r1             0xe                 14
+r2             0x16                22
+r3             0x6                 6
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10084             0x10084 <loop+4>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+24		add	r0, r0, #1	@ point to next
+(gdb) i r
+r0             0x200af             131247
+r1             0xe                 14
+r2             0x24                36
+r3             0x6                 6
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10088             0x10088 <loop+8>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+25		subs	r3, r3, #1	@ decrement counter
+(gdb) i r
+r0             0x200b0             131248
+r1             0xe                 14
+r2             0x24                36
+r3             0x6                 6
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1008c             0x1008c <loop+12>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+26		bne	loop
+(gdb) i r
+r0             0x200b0             131248
+r1             0xe                 14
+r2             0x24                36
+r3             0x5                 5
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10090             0x10090 <loop+16>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+21	loop:	ldrsb 	r1, [r0]  
+(gdb) i r
+r0             0x200b0             131248
+r1             0xe                 14
+r2             0x24                36
+r3             0x5                 5
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10080             0x10080 <loop>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+23		add	r2, r2, r1	@ r2 = r2 + r1
+(gdb) i r
+r0             0x200b0             131248
+r1             0xffffffee          4294967278
+r2             0x24                36
+r3             0x5                 5
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10084             0x10084 <loop+4>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+24		add	r0, r0, #1	@ point to next
+(gdb) i r
+r0             0x200b0             131248
+r1             0xffffffee          4294967278
+r2             0x12                18
+r3             0x5                 5
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10088             0x10088 <loop+8>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+25		subs	r3, r3, #1	@ decrement counter
+(gdb) i r
+r0             0x200b1             131249
+r1             0xffffffee          4294967278
+r2             0x12                18
+r3             0x5                 5
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1008c             0x1008c <loop+12>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+26		bne	loop
+(gdb) i r
+r0             0x200b1             131249
+r1             0xffffffee          4294967278
+r2             0x12                18
+r3             0x4                 4
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10090             0x10090 <loop+16>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+21	loop:	ldrsb 	r1, [r0]  
+(gdb) i r
+r0             0x200b1             131249
+r1             0xffffffee          4294967278
+r2             0x12                18
+r3             0x4                 4
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10080             0x10080 <loop>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+23		add	r2, r2, r1	@ r2 = r2 + r1
+(gdb) i r
+r0             0x200b1             131249
+r1             0xfffffff7          4294967287
+r2             0x12                18
+r3             0x4                 4
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10084             0x10084 <loop+4>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+24		add	r0, r0, #1	@ point to next
+(gdb) i r
+r0             0x200b1             131249
+r1             0xfffffff7          4294967287
+r2             0x9                 9
+r3             0x4                 4
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10088             0x10088 <loop+8>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+25		subs	r3, r3, #1	@ decrement counter
+(gdb) i r
+r0             0x200b2             131250
+r1             0xfffffff7          4294967287
+r2             0x9                 9
+r3             0x4                 4
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1008c             0x1008c <loop+12>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+26		bne	loop
+(gdb) i r
+r0             0x200b2             131250
+r1             0xfffffff7          4294967287
+r2             0x9                 9
+r3             0x3                 3
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10090             0x10090 <loop+16>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+21	loop:	ldrsb 	r1, [r0]  
+(gdb) i r
+r0             0x200b2             131250
+r1             0xfffffff7          4294967287
+r2             0x9                 9
+r3             0x3                 3
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10080             0x10080 <loop>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+23		add	r2, r2, r1	@ r2 = r2 + r1
+(gdb) i r
+r0             0x200b2             131250
+r1             0xc                 12
+r2             0x9                 9
+r3             0x3                 3
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10084             0x10084 <loop+4>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+24		add	r0, r0, #1	@ point to next
+(gdb) i r
+r0             0x200b2             131250
+r1             0xc                 12
+r2             0x15                21
+r3             0x3                 3
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10088             0x10088 <loop+8>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+25		subs	r3, r3, #1	@ decrement counter
+(gdb) i r
+r0             0x200b3             131251
+r1             0xc                 12
+r2             0x15                21
+r3             0x3                 3
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x1008c             0x1008c <loop+12>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+26		bne	loop
+(gdb) 
+21	loop:	ldrsb 	r1, [r0]  
+(gdb) i r
+r0             0x200b3             131251
+r1             0xc                 12
+r2             0x15                21
+r3             0x2                 2
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10080             0x10080 <loop>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+23		add	r2, r2, r1	@ r2 = r2 + r1
+(gdb) i r
+r0             0x200b3             131251
+r1             0xffffffed          4294967277
+r2             0x15                21
+r3             0x2                 2
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0xfffef2d0          0xfffef2d0
+lr             0x0                 0
+pc             0x10084             0x10084 <loop+4>
+cpsr           0x20000010          536870928
+fpscr          0x0                 0
+(gdb) s
+24		add	r0, r0, #1	@ point to next
+(gdb) s
+25		subs	r3, r3, #1	@ decrement counter
+(gdb) s
+26		bne	loop
+(gdb) s
+21	loop:	ldrsb 	r1, [r0]  
+(gdb) s
+23		add	r2, r2, r1	@ r2 = r2 + r1
+(gdb) s
+24		add	r0, r0, #1	@ point to next
+(gdb) s
+25		subs	r3, r3, #1	@ decrement counter
+(gdb) 
+26		bne	loop
+(gdb) 
+27		ldr 	r0, =sum
+(gdb) 
+28		str	r2, [r0]	@ store r2 in location sum
+(gdb) 
+29		mov 	r7, #1
+(gdb) 
+30		svc 	0
+(gdb) 
+[Inferior 1 (process 2076) exited with code 0265]
+(gdb) i r
+The program has no registers now.
+(gdb) 

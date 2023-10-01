@@ -1,0 +1,19 @@
+Starting program: /home/group-11/Desktop/SignedNumbers/Part 5/5_match_ex5_16 
+
+Breakpoint 1, _start () at 5_match_ex5_16.s:14
+14			mov	r5, #13
+(gdb) s
+15			ldr	r0, =our_data
+(gdb) s
+16			mov	r3, #9	
+(gdb) s
+begin () at 5_match_ex5_16.s:18
+18			ldrsb r1, [r0]   @ r1 = contents of loc. pointed to by r0 (sign extended)
+(gdb) s
+19			cmp	r1, r5		@ compare r1 and negative of r5
+(gdb) s
+20			beq 	found		@ branch if r1 is equal to negative of r5
+(gdb) s
+found () at 5_match_ex5_16.s:27
+27	found:		b	found
+(gdb) s
