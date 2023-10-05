@@ -244,7 +244,6 @@ def displayDP(decimalState):
     
     if (decimalState == True) :
         GPIO.output(16, GPIO.HIGH)  # DP
-        print("dp off")
         return True
     
     return False
@@ -272,13 +271,24 @@ def blinkScreen() :
     clkCycle(3)
     clkCycle(4)
     
-    sleep(.5)
+    delayPersonal()
     
     displayOFF()
     clkCycle(1)
     clkCycle(2)
     clkCycle(3)
     clkCycle(4)
+
+def delayPersonal () :
+    
+    counter = 0
+    
+    while (counter < 600) :
+        
+        counter += 1
+        print("Im waiting...")
+        
+    print("im done")
 
 ''' Calls the Clock Cycle '''
 def clkCycle(cycleNum):
