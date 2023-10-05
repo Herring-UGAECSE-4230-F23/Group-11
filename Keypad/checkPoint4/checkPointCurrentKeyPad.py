@@ -1,6 +1,7 @@
 # Group 11's Keypad
 #
-# Created 28SEP2023
+# Created 14SEPT2023
+# Finished 04OCT2023
 # Blessed with the mentorship of Dr. Herring
 # Property of Samuel, Isaac, Austin, and Daniel
 
@@ -168,7 +169,7 @@ def wantToPrint(stop) :
 def blinkLED() :
     
     GPIO.output(18, GPIO.HIGH) # Turns LED On
-    sleep(1)                   # Waits
+    delayPersonal()                   # Waits
     GPIO.output(18, GPIO.LOW)  # Turns LED Off
 
 
@@ -233,6 +234,7 @@ def automaticClock() :
     isOn = True
     threeBs = 0
     iterations = 0
+    buttonReset = 0
     desiredKey = -1
     
     currentFirst = '0'
@@ -301,11 +303,16 @@ def automaticClock() :
                 print(threeBs)
                         
         iterations += 1
+        buttonReset += 1
         
-        if (iterations >= 200) :
+        if (iterations >= 60000) :
             iterations = 0
             autoSeconds += 1
+            print(autoSeconds, " seconds")
+            
+        if (buttonReset >= (3*60000)) :
             desiredKey = -1
+            buttonReset = 0
         
         if (autoSeconds >= 60) :
             autoMinutes += 1
@@ -313,11 +320,28 @@ def automaticClock() :
             PM = adjustToCivilian(str(hOne), str(hTwo))
             if (isOn == True) :
                 displayMilitaryTime(hOne, hTwo, mOne, mTwo, PM)
-        elif (autoMinutes >= 60) :   
+                
+        if (autoMinutes >= 60) :   
             autoHours += 1
-            autoMinutes = 00   
-        elif (autoHours >= 24) :   
+            autoMinutes = 00
+            hOne = int(autoHours/10)
+            hTwo = int(autoHours%10)
+            mOne = int(autoMinutes/10)
+            mTwo = int(autoMinutes%10)
+            PM = adjustToCivilian(str(hOne), str(hTwo))
+            if (isOn == True) :
+                
+                displayMilitaryTime(hOne, hTwo, mOne, mTwo, PM)
+                
+        if (autoHours >= 24) :   
             autoHours = 00
+            hOne = int(autoHours/10)
+            hTwo = int(autoHours%10)
+            mOne = int(autoMinutes/10)
+            mTwo = int(autoMinutes%10)
+            PM = adjustToCivilian(str(hOne), str(hTwo))
+            if (isOn == True) :
+                displayMilitaryTime(hOne, hTwo, mOne, mTwo, PM)
         
         #print("The Seconds are... ", autoSeconds)
 
@@ -424,7 +448,7 @@ def getFirstInput() :
 
             if (checkhOne(desiredKey) == True) :
         
-                sleep(1)
+                delayPersonal()
                 return desiredKey
             
             else :
@@ -469,7 +493,7 @@ def getSecondInput(currentFirst) :
 
             if (checkhTwo(currentFirst, desiredKey) == True) :
         
-                sleep(1)
+                delayPersonal()
                 return desiredKey
             
             else :
@@ -514,7 +538,7 @@ def getThirdInput() :
 
             if (checkmOne(desiredKey) == True) :
         
-                sleep(1)
+                delayPersonal()
                 return desiredKey
             
             else :
@@ -559,7 +583,7 @@ def getFourthInput() :
 
             if (checkmTwo(desiredKey) == True) :
         
-                sleep(1)
+                delayPersonal()
                 return desiredKey
             
             else :
@@ -590,9 +614,7 @@ def getFourthInput() :
     clkCycle(4)
 
 def adjustToCivilian(one, two) :
-    
-    print(one, two)
-    
+        
     if (one == '0') :
         
         return False
@@ -611,13 +633,23 @@ def adjustToCivilian(one, two) :
 
 def displayMilitaryTime(hOne, hTwo, mOne, mTwo, PM) :
     
-    print("entered")
-    
     if (PM == True) :
-        print("entered")
 
-        hOne = int(hOne) - 1
-        hTwo = int(hTwo) - 2
+        if (hOne == 2) : 
+            hOne = 0
+            if (hTwo == 2 or hTwo == 3) : 
+                hOne = 1
+                print(hOne)
+        else :
+            
+            hOne = 0
+
+        if (hTwo == 0) :
+            hTwo = int(8)
+        elif (hTwo == 1) :
+            hTwo = int(9)
+        else :
+            hTwo = int(hTwo) - 2
         
         wantToPrint(hOne)
         clkCycle(1)
@@ -649,6 +681,7 @@ def manualClock():
     threeBs = 0
     iterations = 0
     desiredKey = -1
+    buttonReset = 0
     
     militaryFirst = -1
     militarySecond = -1
@@ -657,12 +690,11 @@ def manualClock():
     currentThird = -1
     currentFourth = -1
     
-    sleep(1)
-    
+    delayPersonal()
+
     while (currentFirst == -1) : 
     
         currentFirst = getFirstInput()
-        print(currentFirst)
         
     wantToPrint(currentFirst)
     clkCycle(1)
@@ -671,7 +703,6 @@ def manualClock():
     while (currentSecond == -1) : 
     
         currentSecond = getSecondInput(currentFirst)
-        print(currentSecond)
         
     GPIO.output(18, GPIO.LOW) # LED
     
@@ -685,8 +716,24 @@ def manualClock():
         PM = False
      
     if (PM == True) :
-        militaryFirst = int(currentFirst) - 1
-        militarySecond = int(currentSecond) - 2
+        if (currentFirst == '2') :
+            
+            militaryFirst = 0
+            
+            if (currentSecond == '2' or currentSecond == '3') :
+                
+                militaryFirst = 1
+                
+        else :
+            
+            militaryFirst = 0
+        
+        if (currentSecond == '0') :
+            militarySecond = int(8)
+        elif (currentSecond == '1') :
+            militarySecond = int(9)
+        else :
+            militarySecond = int(currentSecond) - 2
         
         wantToPrint(militaryFirst)
         clkCycle(1)
@@ -704,7 +751,6 @@ def manualClock():
     while (currentThird == -1) : 
     
         currentThird = getThirdInput()
-        print(currentThird)
     
     GPIO.output(18, GPIO.LOW) # LED
     wantToPrint(currentThird)
@@ -713,7 +759,6 @@ def manualClock():
     while (currentFourth == -1) : 
     
         currentFourth = getFourthInput()
-        print(currentFourth)
         
     wantToPrint(currentFourth)
     clkCycle(4)
@@ -737,6 +782,7 @@ def manualClock():
             if (desiredKey == '#') :
                 
                 threeBs = 0
+                manualSeconds -= 8
                 
                 if (isOn == True) :
                     # Sets the Display State to Off
@@ -766,191 +812,64 @@ def manualClock():
             elif (desiredKey == 'B') :
                 
                 threeBs += 1
+                manualSeconds -= 8
                 print(threeBs)
-                        
+        
+        buttonReset += 1
         iterations += 1
         
-        if (iterations >= 2000) :
+        if (iterations >= 60000) :
             iterations = 0
             manualSeconds += 1
+            print(manualSeconds, " seconds")
+
+        if (buttonReset >= (3*200000)) :
             desiredKey = -1
+            buttonReset = 0
         
         if (manualSeconds >= 60) :
             manualMinutes += 1
             manualSeconds = 00
+            hOne = int(manualHours/10)
+            hTwo = int(manualHours%10)
+            mOne = int(manualMinutes/10)
+            mTwo = int(manualMinutes%10)
             PM = adjustToCivilian(str(hOne), str(hTwo))
             if (isOn == True) :
                 displayMilitaryTime(hOne, hTwo, mOne, mTwo, PM)
         elif (manualMinutes >= 60) :   
             manualHours += 1
-            manualMinutes = 00   
-        elif (manualHours >= 24) :   
-            manualHours = 00
-        
-        #print("The Seconds are... ", autoSeconds)
-       
-        
-''' Main Function '''
-def main() :
-    
-    # Initialize Variables for Ease of Use
-    isOn = True
-    desiredKey = -1
-    currentFirst = '0'
-    currentSecond = '0'
-    currentThird = '0'
-    currentFourth = '0'
-    decimalPoint = False
-    cycleNum = 1
-    checkClock = False
-    blink = False
-    acON = True
-    manON = False
-    
-    # Wipe the Clock Clean, Set to All 0's and No DP
-    blankClock()
-    
-    
-    
-    currentTimeArray = list(getTime())
-    
-    autoHours = int(currentTimeArray[0])*10 + int(currentTimeArray[1])
-    autoMinutes = int(currentTimeArray[4])*10 + int(currentTimeArray[5])
-    autoSeconds = int(currentTimeArray[8])*10 + int(currentTimeArray[9])
-
-    manualHours = 12
-    manualMinutes = 34
-    manualSeconds = 00
-    
-    #displayTime(currentTimeArray[0], currentTimeArray[1], currentTimeArray[4], currentTimeArray[5])
-    
-    ''' Main Loop for the Function '''
-    while True :
-                
-        desiredKey = -1   
-        sleep(.5)
-        
-        ''' Reads Input for the Keypad '''
-        #while (desiredKey == -1) :
-        desiredKey = lookForInput()
-        
-        ''' Controls the Automatic Clock '''
-        if (acON == True and isOn == True) :
-            
-            print("The automatic clock is ticking!")
-            hOne = int(autoHours/10)
-            hTwo = int(autoHours%10)
-            mOne = int(autoMinutes/10)
-            mTwo = int(autoMinutes%10)
-            
-            displayTime(hOne, hTwo, mOne, mTwo)
-            
-        if (manON == True and isOn == True) :
-            
-            print("The manual clock is ticking!")
+            manualMinutes = 00
             hOne = int(manualHours/10)
             hTwo = int(manualHours%10)
             mOne = int(manualMinutes/10)
             mTwo = int(manualMinutes%10)
-        
-        ''' Deciphers the Returned Value '''
-        if (desiredKey == '#') :
-            
-            ''' Turns the Keypad completely off/back on '''
+            PM = adjustToCivilian(str(hOne), str(hTwo))
             if (isOn == True) :
-                # Sets the Display State to Off
-                isOn = False
-                
-                # Calls the Display to turn every segment Off
-                sevenSegFunc.displayOFF()
-                
-                # Calls each clock to update to the Off Call
-                clkCycle(1)
-                clkCycle(2)
-                clkCycle(3)
-                clkCycle(4)
-            else :
-                # Sets the Display State to Back On
-                isOn = True
-                
-                if(acON == True) :
-                    hOne = int(autoHours/10)
-                    hTwo = int(autoHours%10)
-                    mOne = int(autoMinutes/10)
-                    mTwo = int(autoMinutes%10)
-                    displayTime(hOne, hTwo, mOne, mTwo)
-                elif(manON == True) :
-                    # Returns the Display to what it had before being turned off
-                    wantToPrint(currentFirst)
-                    clkCycle(1)
-                    wantToPrint(currentSecond)
-                    clkCycle(2)
-                    wantToPrint(currentThird)
-                    clkCycle(3)
-                    wantToPrint(currentFourth)
-                    clkCycle(4)
-            
-            
-        elif (desiredKey == '*') :
-                # Turns on the decimal point indefinitely
-                decimalPoint = True
-                
-                # Updates the Second Seven Segment Display
-                sevenSegFunc.displayDP(decimalPoint)
-                wantToPrint(currentSecond) # Prints the Desired Character and stores it in the currentKey spot
-                sevenSegFunc.clkCycle(2)
-                
-        elif (manON == True) :
-            ''' Updates the LED Display Based on the User Input '''
-            if (isOn == True):
-            
-                blink = False
-                sevenSegFunc.displayDP(decimalPoint) # Displays the decimal point if it is supposed to be on screen, will need a clock call here so that it updates
-                                
-                if (cycleNum == 1) :
-                    currentFirst = wantToPrint(desiredKey) # Prints the Desired Character and stores it in the currentKey spot
-                elif (cycleNum == 2) :
-                    currentSecond = wantToPrint(desiredKey) # Prints the Desired Character and stores it in the currentKey spot
-                elif (cycleNum == 3) :
-                    currentThird = wantToPrint(desiredKey) # Prints the Desired Character and stores it in the currentKey spot
-                elif (cycleNum == 4) :
-                    currentFourth = wantToPrint(desiredKey) # Prints the Desired Character and stores it in the currentKey spot
-                               
-                sevenSegFunc.clkCycle(cycleNum) # Calls the Clock Cycle for the Corresponding LED Display
-                    
-                # Changes the clock cycle
-                if (cycleNum == 4) :
-                    cycleNum = 1
-                    checkClock = True
-                else :
-                    cycleNum += 1
-        sleep(.5)
-        
-        autoSeconds += 1
-        manualSeconds += 1
-        iterations += 1
-        
-        if (autoSeconds >= 60) :
-            autoMinutes += 1
-            autoSeconds = 00
-        elif (autoMinutes >= 60) :   
-            autoHours += 1
-            autoMinutes = 00   
-        elif (autoHours >= 24) :   
-            autoHours = 00
-            
-        if (manualSeconds >= 60) :   
-            manualMinutes += 1
-            manualSeconds = 00   
-        elif (manualMinutes >= 60) :      
-            manualHours += 1
-            manualMinutes = 00       
-        elif (manualHours >= 24) :  
+                displayMilitaryTime(hOne, hTwo, mOne, mTwo, PM)
+        elif (manualHours >= 24) :   
             manualHours = 00
+            hOne = int(manualHours/10)
+            hTwo = int(manualHours%10)
+            mOne = int(manualMinutes/10)
+            mTwo = int(manualMinutes%10)
+            PM = adjustToCivilian(str(hOne), str(hTwo))
+            if (isOn == True) :
+                displayMilitaryTime(hOne, hTwo, mOne, mTwo, PM)
+        
+        #print("The Seconds are... ", autoSeconds)
 
-        print("The Seconds are... ", autoSeconds)
-        print("The current Iteration is... ", iterations)
+def delayPersonal () :
     
+    counter = 0
+    
+    while (counter < 600) :
+        
+        counter += 1
+        print("Im waiting...")
+        
+    print("im done")
+
 def start() :
     
     blankClock()
@@ -959,11 +878,12 @@ def start() :
     if (desiredKey == 'A') :
             
         automaticClock()
-        sleep(1)
+        delayPersonal()
             
     elif (desiredKey == 'B') :
             
         manualClock()
+        delayPersonal()
     
 # Calls the Function
 while True:
@@ -973,5 +893,3 @@ while True:
     
 
 GPIO.cleanup()
-
- 
