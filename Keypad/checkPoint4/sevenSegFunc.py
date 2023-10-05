@@ -264,6 +264,7 @@ def displayOFF():
 #EOF
 ''' Blink The Screen '''
 def blinkScreen() :
+    # Turns all to 0
     
     display0()
     clkCycle(1)
@@ -273,16 +274,20 @@ def blinkScreen() :
     
     delayPersonal()
     
+    # Turns all Off
     displayOFF()
     clkCycle(1)
     clkCycle(2)
     clkCycle(3)
     clkCycle(4)
 
+
+''' Our Delay File '''
 def delayPersonal () :
     
     counter = 0
     
+    # increments and prints to slow down about one second
     while (counter < 600) :
         
         counter += 1
