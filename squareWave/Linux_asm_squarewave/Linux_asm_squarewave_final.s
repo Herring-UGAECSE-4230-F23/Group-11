@@ -26,6 +26,11 @@
 .equ    MAP_SHARED,1    @ share changes with other processes
 .equ    PROT_RDWR,0x3   @ PROT_READ(0x1)|PROT_WRITE(0x2)
 
+@ Declaring 
+.equ    On_time,  1000000000
+.equ    Off_time, 1000000000
+
+
 @ Constant program data
     .section .rodata
 device:
@@ -62,9 +67,44 @@ main:
     str     r2, [r0]                    @ update register
 
 
+ @ This is the Start of the actual loop of the program
+_start:
+    
+    b       delay            @ Calls a Delay
+    
+top:cmp     r1, #0           @ Checks what state to call
+    beq     turnoff          @ Branches accordingly
+    b       turnon 
+
+
+
+@ Used to Count Down for the Timer
+delay:
+    
+    @ Initialize Variables
+    ldr     r3, =On_time 
+    ldr     r4, =Off_time
+    
+    @ Checks if the wave is rising or falling
+    cmp     r1, #0
+    beq     l2          
+
+@ Logic for if the wave is rising
+l1: subs    r3,r3,#1     
+    bne     l1          
+    b       top          
+    
+@ Logic for if the wave is falling
+l2: subs    r4,r4,#1    
+    bne     l2          
+    b       top         
+  
+
+
+@ Turns on the LED
 turnon:
 
-@ Turn on
+    mov     r1, #0
     add     r0, r5, #GPSET0 @ calc GPSET0 address
 
     mov     r3, #1          @ turn on bit
@@ -72,11 +112,13 @@ turnon:
     orr     r2, r2, r3      @ set bit
     str     r2, [r0]        @ update register
 
-    b       top
+    b       _start          @ Loops back to the main loop
 
+
+
+@ Turns off the LED
 turnoff:
 
-@ Turn off
     mov     r1, #1
     add     r0, r5, #GPCLR0 @ calc GPCLR0 address
 
@@ -85,15 +127,7 @@ turnoff:
     orr     r2, r2, r3      @ set bit
     str     r2, [r0]        @ update register
 
-    b       top
-
-_start:
-
-    @Actual Loop of the Program
-    mov     r1, #1
-top:cmp     r1, #
-    bne     turnoff
-    b       turnon
+    b       _start          @ Loops back to the main loop
 
 
 
@@ -103,4 +137,3 @@ mem_fd:
     .word   device
 O_RDWR_O_SYNC:
     .word   2|256       @ O_RDWR (2)|O_SYNC (256).
-
