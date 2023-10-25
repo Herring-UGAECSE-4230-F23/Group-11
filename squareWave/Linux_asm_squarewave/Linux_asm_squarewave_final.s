@@ -91,7 +91,7 @@ _start:
 
     @Actual Loop of the Program
     mov     r1, #1
-top:cmp     r1, #0
+top:cmp     r1, #
     bne     turnoff
     b       turnon
 
