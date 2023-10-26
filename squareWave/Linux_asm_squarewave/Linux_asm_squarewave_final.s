@@ -30,6 +30,9 @@
 .equ    On_time,  1000000000
 .equ    Off_time, 1000000000
 
+@ 100 Hz 50/50 is 4500000, 4500000
+@ 1  kHz 50/50 is 450000,  450000
+@ 1  kHz 75/25 is 675000,  225000
 
 @ Constant program data
     .section .rodata
