@@ -74,7 +74,7 @@ _start:
     
 top:cmp     r1, #0           @ Checks what state to call
     beq     turnoff          @ Branches accordingly
-    b       turnon 
+    b       turnon           @ Turns on if the LED does not need to be turned off
 
 
 
@@ -86,25 +86,25 @@ delay:
     ldr     r4, =Off_time
     
     @ Checks if the wave is rising or falling
-    cmp     r1, #0
-    beq     l2          
+    cmp     r1, #0      @ Checks if the LED needs to be turned on or off
+    beq     l2          @ Goes to l2 if LED needs to be turned off
 
 @ Logic for if the wave is rising
-l1: subs    r3,r3,#1     
-    bne     l1          
-    b       top          
+l1: subs    r3,r3,#1    @ Decrement Loop Counter
+    bne     l1          @ Reloop
+    b       top         @ Break Loop 
     
 @ Logic for if the wave is falling
-l2: subs    r4,r4,#1    
-    bne     l2          
-    b       top         
+l2: subs    r4,r4,#1    @ Decrement Loop Counter
+    bne     l2          @ Reloop
+    b       top         @ Break Loop
   
 
 
 @ Turns on the LED
 turnon:
 
-    mov     r1, #0
+    mov     r1, #0         @ Signify that the LED needs to be turned off
     add     r0, r5, #GPSET0 @ calc GPSET0 address
 
     mov     r3, #1          @ turn on bit
