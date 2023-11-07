@@ -32,44 +32,58 @@ def morse_to_text(text):
     return ' '.join(morse_code)
 
 
-''' Finds the Length of a Morse Code Unit '''
-# Author: Sam Brewster
-def findLength () :
+''' Finds the Length of a Morse Code Unit By Having the User Sign Attention '''
+def findMorseLength () :
     
-    loop = True
-    fallingEdge = 0
+    # Initialize Variables
+    loop      = True
+    timeStart = 0
+    timeStop  = 0
+    increment = 0
+    noPress   = True
     
+    # Main Loop
     while (loop == True) :
         
-        if (GPIO.input(morseInput) == 1 and fallingEdge == 0) :
+        # Switches between searching for a high and low edge
+        if (GPIO.input(morseInput) == 1 and noPress == True) :
+        
+            noPress = False     # Switch to look for negative
+            increment += 1      # Increment Edge Counter
             
-            startTime = time.time()
-            
-            while (GPIO.input(morseInput) == 1 and fallingEdge == 0) :
-            
-                if (GPIO.input(morseInput) == 0) :
-                    
-                    print(fallingEdge)
-                    fallingEdge += 1
-                    
-                    sleep(.1)
+            # Takes the first time that the user pushes a button
+            if (increment == 1) : 
                 
-        while (GPIO.input(morseInput) == 0) :
+                timeStart = time.time()
+                
+            # Testing print
+            print(increment)
             
-            while (GPIO.input(morseInput) == 1 and fallingEdge != 0) :
+        elif (GPIO.input(morseInput) == 0 and noPress == False) :
             
-                if (GPIO.input(morseInput) == 0) :
-                    
-                    print(fallingEdge)
-                    fallingEdge += 1
-                    sleep(.1)
+            noPress = True     # Switch to look for positive
             
-        if (fallingEdge >= 5) :
+            # Exits when the user has pushed the button 5 times
+            if (increment == 5) :
+                
+                timeStop = time.time()
+                loop = False
+                
+            # Testing Print
+            print(increment)
             
-            loop = False
-            endTime = time.time()
+        sleep(.1) # Debounce
+
+    # Calculate the Final Time
+    finalTime = (timeStop - timeStart)
+    finalTime = int(finalTime)
+    finalTime = finalTime/5
     
-    return (endTime - startTime)/9
+    # Print for Testing
+    print(finalTime)
+    
+    # Returns the Average Time
+    return finalTime        
 
 
 ''' Function that monitors the GPIO pin connected to the telegraph key and returns the duration of the press '''
