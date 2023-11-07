@@ -5,13 +5,14 @@ import time
 
 morseInput = 12
 
+# Set the Mode of the Input Pin
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(morseInput, GPIO.IN)
 
 #List, dictionary, or class for convertng letters into their corresponding morse code.
 lettertomorse_code_dict ={'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..'}
 
-#Function for converting
+''' Function for converting '''
 def text_to_morse(text):
     morse_code = []
     for char in text.upper():
@@ -23,7 +24,7 @@ def text_to_morse(text):
 #List, dictionary, or class for converting morse code to their corresponding letter.
 morsetoletter_code_dict ={'.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F', '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R', '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X', '-.--': 'Y', '--..': 'Z'}
 
-#Function for converting
+''' Function for converting '''
 def morse_to_text(text):
     morse_code = []
     for char in text.upper():
@@ -56,8 +57,17 @@ def findMorseLength () :
                 
                 timeStart = time.time()
                 
+            if ((increment % 2) == 0) :
+                
+                print('.', end="")
+            
+            else :
+                
+                print('-', end="")
+                
+                
             # Testing print
-            print(increment)
+            #print(increment)
             
         elif (GPIO.input(morseInput) == 0 and noPress == False) :
             
@@ -70,14 +80,15 @@ def findMorseLength () :
                 loop = False
                 
             # Testing Print
-            print(increment)
             
         sleep(.1) # Debounce
 
+    print("")
+    
     # Calculate the Final Time
     finalTime = (timeStop - timeStart)
     finalTime = int(finalTime)
-    finalTime = finalTime/5
+    finalTime = finalTime/11
     
     # Print for Testing
     print(finalTime)
@@ -111,7 +122,7 @@ def findDuration() :
     
     print(timeStop - timeStart)
     
-    return timeStop
+    return (timeStop - timeStart)
 
 
 ''' Converts User Input into Dots and Dashes '''
@@ -155,9 +166,15 @@ def danielFunc() :
 
 #Parts 10, 11, and 12
     
+def printToUser () :
+    
+    print("Please Enter Attention (-.-.-) via the Morse Code Tapper: ", end="")
+    
+def main () :
+    
+    printToUser()
+    findMorseLength()
+    
 while True:
-    #danielFunc()
-    #findDuration()
-    print(findLength())
-    #print(GPIO.input(morseInput))
-    #sleep(.01)
+    
+    main()
