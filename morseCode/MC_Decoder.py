@@ -159,7 +159,18 @@ def danielFunc() :
     # This will calculate the average length of a 'unit' by timing
 
 #Function to pay a tone through the speaker anytime the telegraph key is pressed
+def playtone():
+    GPIO.setup(morseInput, GPIO.OUT)
+    
+    try:
+        while True:
+           GPIO.wait_for_edge(morseInput, GPIO.RISING)
+           GPIO.output(morseInput, GPIO.HIGH)
+           time.sleep(.5)
+           GPIO.output(morseInput, GPIO.LOW)
 
+    finally:
+        GPIO.cleanup()
 
 #The interrupt that triggers the ey press length function anytime the GPIO connected t the telegraph is ky enters the high state.
 
