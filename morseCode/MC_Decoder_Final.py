@@ -154,6 +154,8 @@ def callAttention () :
             noPress = False     # Switch to look for negative
             increment += 1      # Increment Edge Counter
             
+            LEDSoundOn()
+            
             # Takes the first time that the user pushes a button
             if (increment == 1) : 
                 
@@ -171,6 +173,7 @@ def callAttention () :
         elif (GPIO.input(morseInput) == 0 and noPress == False) :
             
             noPress = True     # Switch to look for positive
+            LEDSoundOff()
             
             # Exits when the user has pushed the button 5 times
             if (increment == 5) :
@@ -198,7 +201,7 @@ def callAttention () :
 # Author: Isaac Ramirez :)
 def writeAttention () :
 
-    print("-.-.- | attention ")
+    print("- . - . - | attention ")
     
     output = open('/home/group-11/morseDecoder/mcdecode.txt', 'a')
     output.write("-.-.- | attention")
@@ -354,6 +357,7 @@ def main () :
     #unitLength = .3
     
     writeAttention()             # Writes attention to the screen
+    writeToFile('\n')
     
     # Loops To Continually Get User Input
     while True: 
