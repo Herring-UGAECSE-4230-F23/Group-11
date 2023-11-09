@@ -4,13 +4,16 @@ from time import sleep
 import time
 
 morseInput = 12
+ledAudioOutput = 21
 
 # Set the Mode of the Input Pin
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(morseInput, GPIO.IN)
 
-#List, dictionary, or class for converting letters into their corresponding morse code.
-lettertomorse_code_dict ={'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----'}
+GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW)
+
+#List, dictionary, or class for convertng letters into their corresponding morse code.
+lettertomorse_code_dict ={'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..'}
 
 ''' Function for converting '''
 def text_to_morse(text):
@@ -22,17 +25,23 @@ def text_to_morse(text):
 
 
 #List, dictionary, or class for converting morse code to their corresponding letter.
-morsetoletter_code_dict ={'.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F', '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R', '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X', '-.--': 'Y', '--..': 'Z', '.----': '1', '..---': '2', '...--': '3', '....-': '4', '.....': '5', '-....': '6', '--...': '7', '---..': '8', '----.': '9', '-----': '0'}
+# Author: Daniel Covaci
+orsetoletter_code_dict ={'.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E',
+                         '..-.': 'F', '--.': 'G', '....': 'H', '..': 'I', '.---': 'J',
+                         '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O',
+                         '.--.': 'P', '--.-': 'Q', '.-.': 'R', '...': 'S', '-': 'T',
+                         '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X', '-.--': 'Y',
+                         '--..': 'Z', '.----': '1', '..---': '2', '...--': '3', '....-': '4',
+                         '.....': '5', '-....': '6', '--...': '7', '---..': '8', '----.': '9',
+                         '-----': '0', '-.-.- .-.': 'Over'}
+
 
 ''' Function for converting '''
-def morse_to_text(text):
-    morse_code = []
-    for char in text.upper():
-        if char in morsetoletter_code_dict:
-            morse_code.append(morsetoletter_code_dict[char])
-    return ' '.join(morse_code)
-
-
+# Author: Daniel Covaci
+def transToMorse (message) :
+             
+    return (morsetoletter_code_dict.get(message, '?'))
+            
 ''' Finds the Length of a Morse Code Unit By Having the User Sign Attention '''
 def findMorseLength () :
     
@@ -88,7 +97,7 @@ def findMorseLength () :
     # Calculate the Final Time
     finalTime = (timeStop - timeStart)
     finalTime = int(finalTime)
-    finalTime = finalTime/11
+    finalTime = finalTime/15
     
     # Print for Testing
     print(finalTime)
@@ -120,7 +129,7 @@ def findDuration() :
             
         sleep(.1)
     
-    print(timeStop - timeStart)
+    #print(timeStop - timeStart)
     
     return (timeStop - timeStart)
 
@@ -129,36 +138,10 @@ def findDuration() :
 # Author: Daniel Corvaci
 def printDotDashSpace(durationUserGave, oneUnitLength) :
     
-    if (int(durationUserGave) == int(oneUnitLength)) :
+    if (int(durationUserGave) <= int(oneUnitLength)) :
         
         print(".")
-
-'''
-def danielFunc() :
-    
-    start_time = 0
-    end_time = 0
-    duration = 0
-    
-    while True:
         
-        GPIO.WAIT(morseInput, GPIO.FALLING)
-        start_time = time.time()
-        GPIO.WAIT(morseInput, GPIO.RISING)
-        end_time = time.time()
-        duration = end_time - start_time
-        print(duration)
-'''     
-#Function that take lenght of key press as an input and returns its corresponding unit (dot, dash, or space)
-
-
-#Function to determine the average dot and dash lenght by having the user sign attention
-# This function determines the length of a unit because the user will input -.-.-, which will give us 
-    
-    # This function waits for the user to input -.-.- on the keyboard.
-    # This will calculate the average length of a 'unit' by timing
-
-#Function to pay a tone through the speaker anytime the telegraph key is pressed
 def playtone():
     GPIO.setup(morseInput, GPIO.OUT)
     
@@ -169,23 +152,101 @@ def playtone():
            time.sleep(.5)
            GPIO.output(morseInput, GPIO.LOW)
 
-    finally:
-        GPIO.cleanup()
 
-#The interrupt that triggers the ey press length function anytime the GPIO connected t the telegraph is ky enters the high state.
-
-
-#Parts 10, 11, and 12
+def runTime (userDuration, word) :
     
+    noPress   = True
+    loop      = True
+    timeStart = 0
+    timeStop  = 0
+    
+    timeStart = time.time()
+    
+    while (loop == True) :
+        
+        if (GPIO.input(morseInput) == 1 and noPress == True) :
+            
+            noPress = False
+            
+            #print(timeStart)
+        while (GPIO.input(morseInput) == 1 and noPress == False) :
+              
+            timeStop = time.time()
+            changeInTime = timeStop - timeStart
+            durationPress = findDuration()
+            
+            #print(changeInTime)
+            loop = False
+            
+            if (changeInTime <= 2* userDuration) :
+                
+                print(" ", end="")
+                
+            elif (changeInTime > 2 * userDuration) :
+                
+                print("   ", end="")
+            
+            
+            if (durationPress <= 2 * userDuration) :
+                
+                print(".", end="")
+                word += "."
+                
+            elif (durationPress > 2 * userDuration) :
+                
+                print("-", end="")
+                word += "-"
+         
+        if (((time.time() - timeStart) > 7 * userDuration) and word != "") :
+                
+                print(" | ")
+        
+                return "done"
+         
+                
+    
+    return word
+
+''' Prompts the User to Sign Attention '''    
 def printToUser () :
     
     print("Please Enter Attention (-.-.-) via the Morse Code Tapper: ", end="")
-    
+
+''' Main Loop '''
 def main () :
     
-    printToUser()
-    findMorseLength()
+    endLine = False
+    word = ""
+    #unitLength = findMorseLength()
+    unitLength = 1
     
-while True:
+    while True: 
+    
+        if (word == "") :
+            
+            result = runTime(unitLength, word)
+            word = result
+            
+        else :
+            
+            result = runTime(unitLength, word)
+            
+            if (result == "done") :
+            
+                print("the user wants: ", end="")
+                print(transToMorse(word))
+                word = ""
+            
+            else :
+                
+                word = result
+            
+    #printToUser()
+    
+try:
     
     main()
+    
+finally:
+    
+    GPIO.cleanup()
