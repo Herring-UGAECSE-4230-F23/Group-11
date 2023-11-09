@@ -3,17 +3,44 @@ import RPi.GPIO as GPIO
 from time import sleep
 import time
 
-morseInput = 12
+morseInput     = 12
 ledAudioOutput = 21
+audioPin       = 17
+ledPin         = 4
 
 # Set the Mode of the Input Pin
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(morseInput, GPIO.IN)
 
-GPIO.setup(21, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(ledAudioOutput, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(ledPin, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(audioPin, GPIO.OUT, initial=GPIO.LOW)
+
+'''Setup the Output Pins and Start them at low'''
+GPIO.setup(audioPin,  GPIO.OUT)
+GPIO.setup(ledPin,  GPIO.OUT, initial=GPIO.LOW)
+speaker = GPIO.PWM(audioPin, 1200)
 
 #List, dictionary, or class for convertng letters into their corresponding morse code.
 lettertomorse_code_dict ={'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..'}
+
+''' Turns the LED and Sound On '''
+# Author: Austin Iversen
+def LEDSoundOn ():
+    
+    GPIO.output(ledPin, GPIO.HIGH)
+    speaker.start(50)
+
+    return
+
+
+''' Turns the LED and Sound Off '''
+# Author: Austin Iversen
+def LEDSoundOff() :
+    
+    GPIO.output(ledPin, GPIO.LOW)
+    speaker.stop()
+    
 
 ''' Function for converting '''
 def text_to_morse(text):
@@ -43,6 +70,11 @@ def transToMorse (message) :
     x = 0
     size = 1
     output = ""
+    
+    if (message == ".-.-. -.-") :
+        
+        writeOver()
+        return 10
     
     while (x < len(message)) :
     
@@ -77,12 +109,15 @@ def transToMorse (message) :
             output += morsetoletter_code_dict.get(englishText[y], '?')
         y += 1
         
+    writeToFile(output)
+    writeToFile('\n')
+        
     return output
    
    
             
 ''' Finds the Length of a Morse Code Unit By Having the User Sign Attention '''
-def findMorseLength () :
+def callAttention () :
     
     # Initialize Variables
     loop      = True
@@ -144,6 +179,14 @@ def findMorseLength () :
     # Returns the Average Time
     return finalTime        
 
+# Author: Isaac Ramirez :)
+def writeAttention () :
+
+    print("-.-.- | attention ")
+    
+    output = open('/home/group-11/morseDecoder/mcdecode.txt', 'a')
+    output.write("-.-.- | attention")
+    output.close()
 
 ''' Function that monitors the GPIO pin connected to the telegraph key and returns the duration of the press '''
 # Author: Sam Brewster
@@ -160,11 +203,13 @@ def findDuration() :
         
             noPress = False
             timeStart = time.time()
-            #print(timeStart)
+            LEDSoundOn()
+            
         elif (GPIO.input(morseInput) == 0 and noPress == False) :
             
             loop = False
             timeStop = time.time()
+            LEDSoundOff()
             
         sleep(.1)
     
@@ -178,7 +223,8 @@ def printDotDashSpace(durationUserGave, oneUnitLength) :
     if (int(durationUserGave) <= int(oneUnitLength)) :
         
         print(".")
-        
+  
+# Author: Daniel Corvaci
 def playtone():
     GPIO.setup(morseInput, GPIO.OUT)
     
@@ -214,32 +260,35 @@ def runTime (userDuration, letter) :
             #print(changeInTime)
             loop = False
             
-            if (changeInTime <= 2* userDuration and letter != "") :
+            if (changeInTime <= 1.25* userDuration and letter != "") :
                 
                 print(" ", end="")
                 
-            elif (changeInTime > 2 * userDuration and letter != "") :
+            elif (changeInTime > 1.5 * userDuration and letter != "") :
                 
                 print("   ", end="")
                 letter += " "
+                writeToFile(" ")
             
-            if (durationPress <= 2 * userDuration) :
+            if (durationPress <= 1.5 * userDuration) :
                 
                 print(".", end="")
                 letter += "."
+                writeToFile(".")
                 return letter
                 
-            elif (durationPress > 2 * userDuration) :
+            elif (durationPress > 1.5 * userDuration) :
                 
                 print("-", end="")
                 letter += "-"
+                writeToFile("-")
                 return letter
          
                 
         if (((time.time() - timeStart) > 7 * userDuration) and letter != "") :
                 
             print(" | ", end="")
-        
+            writeToFile(" | ")
             return "word done"       
     
     return letter
@@ -249,14 +298,32 @@ def runTime (userDuration, letter) :
 def printToUser () :
     
     print("Please Enter Attention (-.-.-) via the Morse Code Tapper: ", end="")
+    
+# Author: Austin Iversen :)
+def writeToFile (thing) :
+
+    output = open('/home/group-11/morseDecoder/mcdecode.txt', 'a')
+    output.write(thing)
+    output.close()
+    
+# Author: Isaac Ramirez :)
+def writeOver () :
+
+    print(".-.-. -.- | over ")
+    
+    output = open('/home/group-11/morseDecoder/mcdecode.txt', 'a')
+    output.write("over")
+    output.close()
+            
 
 ''' Main Loop '''
 def main () :
     
     endLine = False
     letter = ""
-    #unitLength = findMorseLength()
-    unitLength = .3
+    unitLength = callAttention()
+    #unitLength = .3
+    writeAttention()
     
     while True: 
     
