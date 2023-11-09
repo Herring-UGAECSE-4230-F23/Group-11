@@ -26,21 +26,60 @@ def text_to_morse(text):
 
 #List, dictionary, or class for converting morse code to their corresponding letter.
 # Author: Daniel Covaci
-orsetoletter_code_dict ={'.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E',
-                         '..-.': 'F', '--.': 'G', '....': 'H', '..': 'I', '.---': 'J',
-                         '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O',
-                         '.--.': 'P', '--.-': 'Q', '.-.': 'R', '...': 'S', '-': 'T',
-                         '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X', '-.--': 'Y',
-                         '--..': 'Z', '.----': '1', '..---': '2', '...--': '3', '....-': '4',
+morsetoletter_code_dict ={'.-': 'a', '-...': 'b', '-.-.': 'c', '-..': 'd', '.': 'e',
+                         '..-.': 'f', '--.': 'g', '....': 'h', '..': 'i', '.---': 'j',
+                         '-.-': 'k', '.-..': 'l', '--': 'm', '-.': 'n', '---': 'o',
+                         '.--.': 'p', '--.-': 'q', '.-.': 'r', '...': 's', '-': 't',
+                         '..-': 'u', '...-': 'v', '.--': 'w', '-..-': 'x', '-.--': 'y',
+                         '--..': 'z', '.----': '1', '..---': '2', '...--': '3', '....-': '4',
                          '.....': '5', '-....': '6', '--...': '7', '---..': '8', '----.': '9',
-                         '-----': '0', '-.-.- .-.': 'Over'}
+                         '-----': '0', '-.-.- .-.': 'over'}
 
 
 ''' Function for converting '''
 # Author: Daniel Covaci
 def transToMorse (message) :
-             
-    return (morsetoletter_code_dict.get(message, '?'))
+    
+    x = 0
+    size = 1
+    output = ""
+    
+    while (x < len(message)) :
+    
+        if (message[x] == " ") :
+            
+            size += 1
+            
+        x += 1
+        
+    englishText = [""] * size
+    size2 = 0
+    x = 0
+    
+    while (x < len(message)) :
+        
+        if (message[x] != " ") :
+            
+            englishText[size2] += message[x]
+            
+        elif (message[x] == " ") :
+            
+            size2 += 1
+            
+        x += 1
+    
+    y = 0
+    while (y < size) :
+        
+        if (y == 0) :
+            output += morsetoletter_code_dict.get(englishText[y], '?')
+        elif (y >= 1) :
+            output += morsetoletter_code_dict.get(englishText[y], '?')
+        y += 1
+        
+    return output
+   
+   
             
 ''' Finds the Length of a Morse Code Unit By Having the User Sign Attention '''
 def findMorseLength () :
@@ -129,8 +168,6 @@ def findDuration() :
             
         sleep(.1)
     
-    #print(timeStop - timeStart)
-    
     return (timeStop - timeStart)
 
 
@@ -145,15 +182,14 @@ def printDotDashSpace(durationUserGave, oneUnitLength) :
 def playtone():
     GPIO.setup(morseInput, GPIO.OUT)
     
-    try:
-        while True:
-           GPIO.wait_for_edge(morseInput, GPIO.RISING)
-           GPIO.output(morseInput, GPIO.HIGH)
-           time.sleep(.5)
-           GPIO.output(morseInput, GPIO.LOW)
+    while True:
+        GPIO.wait_for_edge(morseInput, GPIO.RISING)
+        GPIO.output(morseInput, GPIO.HIGH)
+        time.sleep(.5)
+        GPIO.output(morseInput, GPIO.LOW)
 
-
-def runTime (userDuration, word) :
+''' '''
+def runTime (userDuration, letter) :
     
     noPress   = True
     loop      = True
@@ -178,34 +214,36 @@ def runTime (userDuration, word) :
             #print(changeInTime)
             loop = False
             
-            if (changeInTime <= 2* userDuration) :
+            if (changeInTime <= 2* userDuration and letter != "") :
                 
                 print(" ", end="")
                 
-            elif (changeInTime > 2 * userDuration) :
+            elif (changeInTime > 2 * userDuration and letter != "") :
                 
                 print("   ", end="")
-            
+                letter += " "
             
             if (durationPress <= 2 * userDuration) :
                 
                 print(".", end="")
-                word += "."
+                letter += "."
+                return letter
                 
             elif (durationPress > 2 * userDuration) :
                 
                 print("-", end="")
-                word += "-"
+                letter += "-"
+                return letter
          
-        if (((time.time() - timeStart) > 7 * userDuration) and word != "") :
                 
-                print(" | ")
+        if (((time.time() - timeStart) > 7 * userDuration) and letter != "") :
+                
+            print(" | ", end="")
         
-                return "done"
-         
-                
+            return "word done"       
     
-    return word
+    return letter
+
 
 ''' Prompts the User to Sign Attention '''    
 def printToUser () :
@@ -216,30 +254,29 @@ def printToUser () :
 def main () :
     
     endLine = False
-    word = ""
+    letter = ""
     #unitLength = findMorseLength()
-    unitLength = 1
+    unitLength = .3
     
     while True: 
     
-        if (word == "") :
+        if (letter == "") :
             
-            result = runTime(unitLength, word)
-            word = result
+            result = runTime(unitLength, letter)
+            letter = result
             
         else :
             
-            result = runTime(unitLength, word)
+            result = runTime(unitLength, letter)
             
-            if (result == "done") :
+            if (result == "word done") :
             
-                print("the user wants: ", end="")
-                print(transToMorse(word))
-                word = ""
+                print(transToMorse(letter))
+                letter = ""
             
             else :
                 
-                word = result
+                letter = result
             
     #printToUser()
     
