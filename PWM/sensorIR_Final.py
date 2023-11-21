@@ -86,7 +86,7 @@ def turnRotaryEncoder():
             RPM /= 10
             rotations = 0
             
-            expectedRPM = dutyCycle * 20 * 5         
+            expectedRPM = dutyCycle * 20 * 3         
             
             print("Duty Cycle: ", dutyCycle, "expectedRPM: ", expectedRPM, "actualRPM: ", RPM)
             
@@ -105,7 +105,7 @@ def turnRotaryEncoder():
             
             if (dtState != clkState) :
                     
-                dutyCycle += .5
+                dutyCycle += 2.5
                 
                 if (dutyCycle >= 100) :
                     
@@ -113,7 +113,7 @@ def turnRotaryEncoder():
                 
             else:
                 
-                dutyCycle -= .5
+                dutyCycle -= 2.5
                 
                 if (dutyCycle <= 0) :
                     
@@ -122,6 +122,7 @@ def turnRotaryEncoder():
         clkLastState = clkState
         time.sleep(0.01)
 
+        # 22 spins per second on 12 duty cycle
 
         if (swState == GPIO.LOW) :
                 
