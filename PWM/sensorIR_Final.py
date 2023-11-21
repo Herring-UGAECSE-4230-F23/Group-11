@@ -71,28 +71,34 @@ def turnRotaryEncoder():
     # Main Loop
     while True:
         
+        # Checks to see if a second has elapsed
         if ((time.time() - startTime) > 1) :
             
-            elapsedTime = (time.time() - startTime)
             
-            startTime = time.time()
+            #elapsedTime = (time.time() - startTime)
             
-            RPM = rotations
-            #RPM /= elapsedTime
-
-            RPM *= 60
-            RPM /= 3
-            RPM *= dutyCycle
-            RPM /= 10
-            rotations = 0
+            startTime = time.time()    # Restart the timer
             
-            expectedRPM = dutyCycle * 20 * 3         
+            RPM = rotations            # Set the RPM = Rotations
+            #RPM /= elapsedTime        # Commented out for experimeting
+            RPM *= 60                  # Make RPM = Rotations Per Minute
+            RPM /= 3                   # Divide By 3 because there are 3 fan blades
+            RPM *= dutyCycle           # Mutiply by the duty cycle to account for discharge rate
+            RPM /= 10                  # Divide by 10 to account for the duty cycle
+            
+            rotations = 0              # Reset Rotations
+            
+            expectedRPM = dutyCycle    # Make the expectedRPM equal to the duty cycle
+            expectedRPM *= 60          # Multipy by 60 to make it per minute
+            expectedRPM /= 3           # Divide by 3 to account for 3 fan blades
+            expectedRPM *= 3           # Muliply by 3 to account for error (Found by counting RPM in Slo Mo)
             
             print("Duty Cycle: ", dutyCycle, "expectedRPM: ", expectedRPM, "actualRPM: ", RPM)
             
+        # Counts when the IR Sensor is Obstructed
         if (GPIO.input(irPin) == 0) :
             
-            rotations += 1
+            rotations += 1             # Increments the Rotations Per Second
         
         # Get the state for each input pin
         clkState = GPIO.input(clk_pin)
@@ -107,6 +113,7 @@ def turnRotaryEncoder():
                     
                 dutyCycle += 2.5
                 
+                # Check if within boundaries
                 if (dutyCycle >= 100) :
                     
                     dutyCycle = 100
@@ -115,52 +122,43 @@ def turnRotaryEncoder():
                 
                 dutyCycle -= 2.5
                 
+                # Check if within boundaries
                 if (dutyCycle <= 0) :
                     
                     dutyCycle = 1
             
         clkLastState = clkState
-        time.sleep(0.01)
+        time.sleep(0.01) # Debounce
 
-        # 22 spins per second on 12 duty cycle
+        # In our slow motion video, we found 22 spins per second on 12 duty cycle
 
+        # Logic For Button Press
         if (swState == GPIO.LOW) :
                 
+            # Debounce
             time.sleep(.3)
             
+            # Switch On to Off and Off to On Logic
             if (isOn == True) :
                 
+                # Kill the Output
                 pwm.start(0)
                 pwm.stop
                 isOn = False
                 
             else :
-                    
+                   
+                # Restart the Output
                 isOn = True
                 pwm.ChangeFrequency(frequency)
                 pwm.start(dutyCycle)
-            
-            print(isOn)
-                
-        if (isOn == False) :
-            
-            pwm.stop
-            
-        else :
-            
-            pwm.start(dutyCycle)
           
             
 # Main Loop 
 try:
     while True:
 
-        turnRotaryEncoder()
-        #pwm.ChangeFrequency(1000)
-        #pwm.start(10)
-        #print(GPIO.input(irPin))
-        
-        
+        turnRotaryEncoder()       
 
         
 finally:
